@@ -1,13 +1,35 @@
 <?php
-    include 'model/UserModel.php';
 
-    if (!$_POST['user'] )
-        echo "Usuário não inserido!";
+use DAO\ContactDAO;
+
+include 'model/UserModel.php';
+include 'model/ContactModel.php';
+
+
+include 'DAO/Connection.php';
+include 'DAO/ContactDAO.php';
+
+try {
 
     $user = $_POST['user'];
     $password = $_POST['pwd'];
 
     $userModel = new UserModel($user, $password);
+    $contactModel = new ContactModel();
+    $contactDao = new ContactDAO();
+
+    $contactModel->setFirstName( $_POST['firstname']);
+    $contactModel->setLastName($_POST['lastname']);
+    $contactModel->setCompany($_POST['company']);
+    $contactModel->setPhoneNumber($_POST['phonenumber']);
+    $contactModel->setEmail($_POST['email']);
+    $contactModel->setBirthday($_POST['birthday']);
+    $contactModel->setNote($_POST['note']);
+
+    $contactDao->InsertContact($contactModel);
+}catch (Exception $e){
+       echo $e->getMessage();
+}
 
 
 ?>
@@ -24,7 +46,8 @@
         <header>
             <div class="container">
                 <h1>Agenda <?php echo $userModel->getUser();?></h1>
-                <input type="text" name="search" placeholder="search">
+                <a href="add.php"><input type="button" value="Adicionar"></a>
+                <input type="text" name="search" placeholder="search" autocomplete="on">
                 <hr>
             </div>
         </header>
@@ -37,15 +60,18 @@
                 <hr>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th> ID</th>
-                        <th> Nome </th>
-                        <th> ID</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="contacts">
+
+                <?php  while($contactDao->SelectContact())  {?>
+                <hr>
+                <span>
+
+                    <a href="Add.php"><?php echo$contactDao->SelectContact()?></a>
+
+                </span>
+                <?php }?>
+            </div>
+
         </div>
         <a href="index.php">Voltar</a>
     </div>
