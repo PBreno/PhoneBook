@@ -1,8 +1,8 @@
 <?php
 
-namespace DAO;
+namespace src\public\DAO;
 
-use ContactModel;
+use src\public\Model\ContactModel;
 
 class ContactDAO {
 

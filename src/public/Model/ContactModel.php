@@ -1,14 +1,16 @@
 <?php
 
-class ContactModel{
+namespace src\public\Model;
+class ContactModel
+{
 
-   private $FirstName;
-   private $LastName;
-   private $Company;
-   private $phoneNumber;
-   private $email;
-   private $birthday;
-   private $note;
+    private $FirstName;
+    private $LastName;
+    private $Company;
+    private $phoneNumber;
+    private $email;
+    private $birthday;
+    private $note;
 
     public function __construct()
     {

@@ -1,6 +1,8 @@
 <?php
 
-namespace DAO;
+namespace src\public\DAO;
+
+use DAO\PDOException;
 
 class Connection {
 

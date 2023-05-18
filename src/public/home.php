@@ -1,6 +1,8 @@
 <?php
 
-use DAO\ContactDAO;
+use src\public\DAO\ContactDAO;
+use src\public\Model\ContactModel;
+use src\public\Model\UserModel;
 
 include 'model/UserModel.php';
 include 'model/ContactModel.php';

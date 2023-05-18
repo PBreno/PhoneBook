@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: phonebook-app
+    restart: always
+    working_dir: /var/www
+    volumes:
+      - ../src:/var/www
+
+  nginx:
+    image: nginx:1.24-alpine
+    container_name: phonebook-nginx
+    ports:
+      - '8001:80'
+      - '433:433'
+    volumes:
+      - ../src:/var/www
+      - ./nginx:/etc/nginx/conf.d
